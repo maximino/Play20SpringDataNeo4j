@@ -67,15 +67,15 @@ public class GalaxyService {
 		if (path == null) {
 			return Collections.emptyList();
 		}
-		return convertNodesWorlds(path);
+		return convertNodesToWorlds(path);
 	}
 
-	private List<World> convertNodesWorlds(final Path list) {
-		final List<World> actorAndMovieList = new LinkedList<World>();
+	private List<World> convertNodesToWorlds(final Path list) {
+		final List<World> result = new LinkedList<World>();
 		for (Node node : list.nodes()) {
-			actorAndMovieList.add(template.load(node, World.class));
+			result.add(template.load(node, World.class));
 		}
-		return actorAndMovieList;
+		return result;
 	}
 	
 	private World createWorld(String name, int moons) {
