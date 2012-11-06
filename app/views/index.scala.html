@@ -1,0 +1,61 @@
+@(worlds: List[beans.World], path: List[beans.World])
+
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/bootstrap.css")">
+<link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
+</head>
+<body>
+	<div class="container">
+		<div class="content">
+			<div class="page-header">
+				<h2>Play 2.0 + Spring Module + Spring Data neo4j</h2>
+			</div>
+			<div class="row">
+				<div class="span14">
+					<fieldset>
+						<legend>Here are some objects/relations we just created</legend>
+						<table class="table table-hover">
+							<thead>
+								<tr>
+									<th></th>
+									<th></th>
+									<th></th>
+									<th>Reachable by rocket</th>
+								</tr>
+							</thead>
+							<tbody>
+								@for(world <- worlds) {
+								<tr>
+									<td>@world.id</td>
+									<td>@world.name</td>
+									<td>@world.moons</td>
+									<td>@for(otherWorld <- world.reachableByRocket) {
+										@otherWorld.name }</td>
+								</tr>
+								}
+							</tbody>
+						</table>
+						<legend>And the path from @worlds(0).name to @worlds(worlds.size -1).name</legend>
+						<ul class="breadcrumb">
+							@for(pathWorld <- path) {
+							<li><a href="#">@pathWorld.name</a> <span class="divider">/</span></li>
+							}
+						</ul>
+					</fieldset>
+				</div>
+			</div>
+		</div>
+		<footer>
+			<p><br/>
+				<a href="https://github.com/aarmam/Play20SpringDataNeo4j">github.com/aarmam/Play20SpringDataNeo4j</a>
+			</p>
+		</footer>
+	</div>
+</body>
+</html>
+
+
+
+
