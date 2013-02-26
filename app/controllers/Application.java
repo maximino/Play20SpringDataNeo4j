@@ -2,19 +2,21 @@ package controllers;
 
 import java.util.List;
 
-import play.api.modules.spring.Spring;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.index;
 import beans.GalaxyService;
 import beans.World;
 
+@org.springframework.stereotype.Controller
 public class Application extends Controller {
 
-	public static Result index() {
-		GalaxyService galaxyService = Spring.getBeanOfType(GalaxyService.class);
-		if (galaxyService == null)
-			notFound("Unable to load galaxyService from the Spring Context.");
+	@Autowired
+	GalaxyService galaxyService;
+
+	public Result index() {
 
 		if (galaxyService.getNumberOfWorlds() == 0) {
 			galaxyService.makeSomeWorldsAndRelations();
